@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Full Name -->
+
+        <!-- Birthdate -->
+        <TextView
+            android:id="@+id/fullname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="Full Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/birthdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Birthdate"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/fullname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Address -->
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/birthdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Contact -->
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Past Surgeries -->
+        <TextView
+            android:id="@+id/past_surgeries"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Past Surgeries"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/contact"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Illnesses -->
+        <TextView
+            android:id="@+id/illnesses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Illnesses"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/past_surgeries"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Hospitalization -->
+        <TextView
+            android:id="@+id/hospitalization"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Hospitalization"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/illnesses"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Chronic Condition -->
+        <TextView
+            android:id="@+id/chronic_condition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Chronic Condition"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/hospitalization"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Allergies -->
+        <TextView
+            android:id="@+id/allergies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Allergies"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/chronic_condition"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Family Medical History -->
+        <TextView
+            android:id="@+id/familymed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Family Medical History"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/allergies"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Current Medications -->
+        <TextView
+            android:id="@+id/currentmed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Current Medications"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/familymed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Symptoms -->
+        <TextView
+            android:id="@+id/symptoms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Symptoms"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/currentmed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Vaccination -->
+        <TextView
+            android:id="@+id/vaccination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Vaccination"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/symptoms"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Mental Health -->
+        <TextView
+            android:id="@+id/mentalhealth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mental Health"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/vaccination"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Date -->
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Date Uploaded"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/mentalhealth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
