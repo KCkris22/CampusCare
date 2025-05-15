@@ -118,6 +118,7 @@ public abstract class VolleyMultipartRequest extends Request<NetworkResponse> {
                         "\"; filename=\"" +
                         dataFile.getFileName() +
                         "\"" + lineEnd);
+
         if (dataFile.getType() != null && !dataFile.getType().trim().isEmpty()) {
             dos.writeBytes("Content-Type: " + dataFile.getType() + lineEnd);
         }
