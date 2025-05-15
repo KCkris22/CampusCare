@@ -19,35 +19,30 @@ public class ViewmedicalInfo extends AppCompatActivity {
 
     TextView fullname, dob, bloodType, medicalConditions, allergies, medications;
     String Name;
-    // Assuming you pass patientId to fetch data from the server
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewmedicalinfo);
 
-        // Initialize the TextViews
-        fullname = findViewById(R.id.fullname);
-        dob = findViewById(R.id.dob);
-        bloodType = findViewById(R.id.bloodType);
-        medicalConditions = findViewById(R.id.medicalConditions);
-        allergies = findViewById(R.id.allergies);
-        medications = findViewById(R.id.medications);
+        // Match these with your actual XML IDs
+        fullname = findViewById(R.id.fullname); // matches
+        dob = findViewById(R.id.birthdate); // changed from R.id.dob to R.id.birthdate
+        bloodType = findViewById(R.id.address); // assuming bloodType mapped to address field
+        medicalConditions = findViewById(R.id.illnesses); // matches illness info
+        allergies = findViewById(R.id.past_surgeries); // assuming this represents allergies
+        medications = findViewById(R.id.currentmed); // matches current medications
 
-        // Get the patient ID passed from the previous activity
         Name = getIntent().getStringExtra("Name");
 
-        // Fetch the medical info for this patient
         fetchMedicalInfo();
     }
 
-    private void fetchMedicalInfo() {// Update with your endpoint
-
+    private void fetchMedicalInfo() {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo,
                 response -> {
                     try {
                         JSONObject obj = new JSONObject(response);
-                        // Set the data to TextViews
                         fullname.setText(obj.getString("name"));
                         dob.setText(obj.getString("dob"));
                         bloodType.setText(obj.getString("bloodType"));
@@ -66,12 +61,11 @@ public class ViewmedicalInfo extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("Name", Name); // Send the patientId to the server
+                params.put("Name", Name);
                 return params;
             }
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
-
 }

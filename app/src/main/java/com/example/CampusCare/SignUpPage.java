@@ -33,77 +33,42 @@ public class SignUpPage extends AppCompatActivity {
         name = findViewById(R.id.Name);
         age = findViewById(R.id.Age);
         gender = findViewById(R.id.Gender);
-        contact = findViewById(R.id.Contact);  // <- Dapat meron kang EditText para dito sa XML!
+        contact = findViewById(R.id.Contact);
         SignUp = findViewById(R.id.SignUp);
 
         SignUp.setOnClickListener(v -> {
-            // Validation checks
-            if(email.getText().toString().isEmpty()){
-                email.setError("Please enter your email");
-            }else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-                email.setError("Please enter a valid email");
-            }
-            if(password.getText().toString().isEmpty()) {
-                password.setError("Please enter your password");
-            }else if(password.getText().toString().length() < 8){
-                password.setError("Password must be at least 8 characters");
-            }
-            if(confirmPassword.getText().toString().isEmpty()) {
-                confirmPassword.setError("Please confirm your password");
-            }else if(!confirmPassword.getText().toString().equals(password.getText().toString())){
-                confirmPassword.setError("Passwords do not match");
-            }
-            if(name.getText().toString().isEmpty())
-                name.setError("Please enter your name");
-            if(age.getText().toString().isEmpty())
-                age.setError("Please enter your age");
-            if(contact.getText().toString().isEmpty())
-                contact.setError("Please enter your contact");
+            String Email = email.getText().toString();
+            String Password = password.getText().toString();
+            String ConfirmPassword= confirmPassword.getText().toString();
+            String Name = name.getText().toString();
+            String Age = age.getText().toString();
+            String Gender = gender.getText().toString();
+            String Contact = contact.getText().toString();
+            SignUp(Email, Password, ConfirmPassword, Name, Age, Gender, Contact);
 
-            // If all fields are valid
-            if (
-                    !email.getText().toString().isEmpty() &&
-                            android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches() &&
-                            !password.getText().toString().isEmpty() &&
-                            password.getText().toString().length() >= 8 &&
-                            !confirmPassword.getText().toString().isEmpty() &&
-                            confirmPassword.getText().toString().equals(password.getText().toString()) &&
-                            !name.getText().toString().isEmpty() &&
-                            !age.getText().toString().isEmpty() &&
-                            !contact.getText().toString().isEmpty()
-            ) {
-                String url = "http://192.168.214.179/FinalProject/signup.php";
-
-                StringRequest request = new StringRequest(Request.Method.POST, url,
-                        response -> {
-                            if (response.trim().equals("success")) {
-                                Toast.makeText(SignUpPage.this, "Account created successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignUpPage.this, LogInPage.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(SignUpPage.this, "Server Response: " + response, Toast.LENGTH_LONG).show();
-                            }
-                        },
-                        error -> Toast.makeText(SignUpPage.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show()
-                ) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> data = new HashMap<>();
-                        data.put("name", name.getText().toString());
-                        data.put("gender", gender.getText().toString());
-                        data.put("age", age.getText().toString());
-                        data.put("contact", contact.getText().toString());
-                        data.put("email", email.getText().toString());
-                        data.put("password", password.getText().toString());
-                        data.put("confirmPassword", confirmPassword.getText().toString());
-                        return data;
-                    }
-                };
-
-                RequestQueue queue = Volley.newRequestQueue(SignUpPage.this);
-                queue.add(request);
-            }
         });
+    }
+
+    private void SignUp(String Email, String Password, String ConfirmPassword, String Name, String Age, String Gender, String Contact) {
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.SIGNUP,
+                response -> {
+                    Toast.makeText(this, "Sign Up successfully : " + response, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(SignUpPage.this, LogInPage.class);
+                    intent.putExtra("Name", Name);
+                    startActivity(intent);
+                },
+                error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> map = new HashMap<>();
+                map.put("Email", Email);
+                map.put("Password", Password);
+                map.put("ConfirmPassword", ConfirmPassword);
+                map.put("Name", Name);
+                map.put("Age", Age);
+                return map;
+            }
+        };
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }

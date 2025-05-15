@@ -12,7 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddMedicalInfornation extends AppCompatActivity {
     EditText etPatientName, etDOB, etBloodType, etMedicalConditions, etAllergies, etMedications;
@@ -43,8 +48,19 @@ public class AddMedicalInfornation extends AppCompatActivity {
         btnUploadFile.setOnClickListener(v -> openFilePicker());
 
 
-        btnSave.setOnClickListener(v -> saveMedicalHistory());
+        btnSave.setOnClickListener(v -> {
+            String name = etPatientName.getText().toString();
+            String dob = etDOB.getText().toString();
+            String bloodType = etBloodType.getText().toString();
+            String medicalConditions = etMedicalConditions.getText().toString();
+            String allergies = etAllergies.getText().toString();
+            String medications = etMedications.getText().toString();
+            AddMedicalinfo(name, dob, bloodType, medicalConditions, allergies, medications);
+
+        });
     }
+
+
 
 
     private void showDatePicker() {
@@ -78,19 +94,24 @@ public class AddMedicalInfornation extends AppCompatActivity {
     }
 
 
-    private void saveMedicalHistory() {
-        String name = etPatientName.getText().toString();
-        String dob = etDOB.getText().toString();
-        String bloodType = etBloodType.getText().toString();
-        String conditions = etMedicalConditions.getText().toString();
-        String allergies = etAllergies.getText().toString();
-        String medications = etMedications.getText().toString();
-
-
-        if (name.isEmpty() || dob.isEmpty()) {
-            Toast.makeText(this, "Please fill required fields", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Medical History Saved!", Toast.LENGTH_LONG).show();
-        }
+    private void AddMedicalinfo(String name, String dob, String bloodType, String medicalConditions, String allergies, String medications) {
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.AddMedicalInformation,
+                response -> {
+                    Toast.makeText(this, "Seccessfully Added: " + response, Toast.LENGTH_LONG).show();
+                },
+                error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> map = new HashMap<>();
+                map.put("name", name);
+                map.put("dob", dob);
+                map.put("bloodType", bloodType);
+                map.put("medicalConditions", medicalConditions);
+                map.put("allergies", allergies);
+                map.put("medications", medications);
+                return map;
+            }
+        };
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }
