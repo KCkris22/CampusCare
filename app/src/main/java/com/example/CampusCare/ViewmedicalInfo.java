@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,60 +17,46 @@ import java.util.Map;
 
 public class ViewmedicalInfo extends AppCompatActivity {
 
-    TextView fullname, birthdate, address, contact, past_surgeries, illnesses, hospitalization, chronic_condition, allergies, familymed, currentmed, symptoms, vaccination, mentalhealth, dateText;
-    String dateReceived;
+    TextView fullname, dob, bloodType, medicalConditions, allergies, medications;
+    String Name;
+    // Assuming you pass patientId to fetch data from the server
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewmedicalinfo);
 
-        // Find all views
+        // Initialize the TextViews
         fullname = findViewById(R.id.fullname);
-        birthdate = findViewById(R.id.birthdate);
-        address = findViewById(R.id.address);
-        contact = findViewById(R.id.contact);
-        past_surgeries = findViewById(R.id.past_surgeries);
-        illnesses = findViewById(R.id.illnesses);
-        hospitalization = findViewById(R.id.hospitalization);
-        chronic_condition = findViewById(R.id.chronic_condition);
+        dob = findViewById(R.id.dob);
+        bloodType = findViewById(R.id.bloodType);
+        medicalConditions = findViewById(R.id.medicalConditions);
         allergies = findViewById(R.id.allergies);
-        familymed = findViewById(R.id.familymed);
-        currentmed = findViewById(R.id.currentmed);
-        symptoms = findViewById(R.id.symptoms);
-        vaccination = findViewById(R.id.vaccination);
-        mentalhealth = findViewById(R.id.mentalhealth);
-        dateText = findViewById(R.id.dateText);
+        medications = findViewById(R.id.medications);
 
-        dateReceived = getIntent().getStringExtra("date");
+        // Get the patient ID passed from the previous activity
+        Name = getIntent().getStringExtra("Name");
 
+        // Fetch the medical info for this patient
         fetchMedicalInfo();
     }
 
-    private void fetchMedicalInfo() {
-        String url = "http://192.168.214.179/FinalProject/viewmedicalinfo.php";
+    private void fetchMedicalInfo() {// Update with your endpoint
 
-        StringRequest request = new StringRequest(Request.Method.POST, url,
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo,
                 response -> {
                     try {
                         JSONObject obj = new JSONObject(response);
-                        fullname.setText(obj.getString("fullname"));
-                        birthdate.setText(obj.getString("birthdate"));
-                        address.setText(obj.getString("address"));
-                        contact.setText(obj.getString("contact"));
-                        past_surgeries.setText(obj.getString("past_surgeries"));
-                        illnesses.setText(obj.getString("illnesses"));
-                        hospitalization.setText(obj.getString("hospitalization"));
-                        chronic_condition.setText(obj.getString("chronic_condition"));
+                        // Set the data to TextViews
+                        fullname.setText(obj.getString("name"));
+                        dob.setText(obj.getString("dob"));
+                        bloodType.setText(obj.getString("bloodType"));
+                        medicalConditions.setText(obj.getString("medicalConditions"));
                         allergies.setText(obj.getString("allergies"));
-                        familymed.setText(obj.getString("familymed"));
-                        currentmed.setText(obj.getString("currentmed"));
-                        symptoms.setText(obj.getString("symptoms"));
-                        vaccination.setText(obj.getString("vaccination"));
-                        mentalhealth.setText(obj.getString("mentalhealth"));
-                        dateText.setText(obj.getString("Date"));
+                        medications.setText(obj.getString("medications"));
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText(this, "Error parsing response", Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
@@ -81,11 +66,12 @@ public class ViewmedicalInfo extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("date", dateReceived);
+                params.put("Name", Name); // Send the patientId to the server
                 return params;
             }
         };
 
-        Volley.newRequestQueue(this).add(request);
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
+
 }

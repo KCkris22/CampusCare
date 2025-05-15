@@ -135,9 +135,11 @@ public class LogInPage extends AppCompatActivity {
     }
 
     // Get network type (Wi-Fi or Mobile Data)
+
     private String getNetworkType() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
 
         if (activeNetwork != null) {
             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {

@@ -5,27 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#A4C8F0"> <!-- Correct background reference -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Full Name -->
+        <!-- Personal Information Section -->
+        <TextView
+            android:id="@+id/personal_info_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Personal Information"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Birthdate -->
         <TextView
             android:id="@+id/fullname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
             android:text="Full Name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:textSize="16sp"
+            android:textColor="#212121"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/personal_info_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/birthdate"
@@ -33,154 +44,151 @@
             android:layout_height="wrap_content"
             android:text="Birthdate"
             android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/fullname"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Address -->
+        <!-- Medical History Section -->
+        <TextView
+            android:id="@+id/medical_history_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Medical History"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/birthdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TextView
             android:id="@+id/address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Address"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/birthdate"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/medical_history_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Contact -->
         <TextView
             android:id="@+id/contact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Contact"
             android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/address"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Past Surgeries -->
+        <!-- Health Conditions Section -->
+        <TextView
+            android:id="@+id/health_conditions_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Health Conditions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/contact"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TextView
             android:id="@+id/past_surgeries"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Past Surgeries"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/contact"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/health_conditions_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Illnesses -->
         <TextView
             android:id="@+id/illnesses"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Illnesses"
             android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/past_surgeries"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Hospitalization -->
         <TextView
             android:id="@+id/hospitalization"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Hospitalization"
             android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/illnesses"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Chronic Condition -->
+        <!-- Current Medications Section -->
         <TextView
-            android:id="@+id/chronic_condition"
+            android:id="@+id/current_medications_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Chronic Condition"
-            android:textSize="16sp"
+            android:text="Current Medications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@id/hospitalization"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Allergies -->
-        <TextView
-            android:id="@+id/allergies"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Allergies"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/chronic_condition"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
-
-        <!-- Family Medical History -->
-        <TextView
-            android:id="@+id/familymed"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Family Medical History"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/allergies"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
-
-        <!-- Current Medications -->
         <TextView
             android:id="@+id/currentmed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Current Medications"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/familymed"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/current_medications_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Symptoms -->
+        <!-- Symptoms Section -->
+        <TextView
+            android:id="@+id/symptoms_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Symptoms"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/currentmed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TextView
             android:id="@+id/symptoms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Symptoms"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/currentmed"
+            android:textColor="#757575"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/symptoms_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
-
-        <!-- Vaccination -->
-        <TextView
-            android:id="@+id/vaccination"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Vaccination"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/symptoms"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
-
-        <!-- Mental Health -->
-        <TextView
-            android:id="@+id/mentalhealth"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Mental Health"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/vaccination"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Date -->
         <TextView
@@ -190,11 +198,11 @@
             android:text="Date Uploaded"
             android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/mentalhealth"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintTop_toBottomOf="@id/symptoms"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
