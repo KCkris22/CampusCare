@@ -13,8 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +26,10 @@ public class AddMedicalInfornation extends AppCompatActivity {
     private static final int PICK_FILE_REQUEST = 1;
     private Uri fileUri;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addmedicalinformation);
-
 
         etPatientName = findViewById(R.id.etPatientName);
         etDOB = findViewById(R.id.etDOB);
@@ -41,12 +40,8 @@ public class AddMedicalInfornation extends AppCompatActivity {
         btnUploadFile = findViewById(R.id.btnUploadFile);
         btnSave = findViewById(R.id.btnSave);
 
-
         etDOB.setOnClickListener(v -> showDatePicker());
-
-
         btnUploadFile.setOnClickListener(v -> openFilePicker());
-
 
         btnSave.setOnClickListener(v -> {
             String name = etPatientName.getText().toString();
@@ -55,13 +50,10 @@ public class AddMedicalInfornation extends AppCompatActivity {
             String medicalConditions = etMedicalConditions.getText().toString();
             String allergies = etAllergies.getText().toString();
             String medications = etMedications.getText().toString();
-            AddMedicalinfo(name, dob, bloodType, medicalConditions, allergies, medications);
 
+            AddMedicalinfo(name, dob, bloodType, medicalConditions, allergies, medications);
         });
     }
-
-
-
 
     private void showDatePicker() {
         Calendar calendar = Calendar.getInstance();
@@ -76,13 +68,11 @@ public class AddMedicalInfornation extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         startActivityForResult(intent, PICK_FILE_REQUEST);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -93,13 +83,11 @@ public class AddMedicalInfornation extends AppCompatActivity {
         }
     }
 
-
     private void AddMedicalinfo(String name, String dob, String bloodType, String medicalConditions, String allergies, String medications) {
-        StringRequest request = new StringRequest(Request.Method.POST, endpoints.AddMedicalInformation,
-                response -> {
-                    Toast.makeText(this, "Seccessfully Added: " + response, Toast.LENGTH_LONG).show();
-                },
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, endpoints.AddMedicalInformation,
+                response -> Toast.makeText(this, "Successfully Added: " + new String(response.data), Toast.LENGTH_LONG).show(),
                 error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()) {
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>();
@@ -111,7 +99,30 @@ public class AddMedicalInfornation extends AppCompatActivity {
                 map.put("medications", medications);
                 return map;
             }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                if (fileUri != null) {
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(fileUri);
+                        byte[] fileBytes = new byte[inputStream.available()];
+                        inputStream.read(fileBytes);
+                        inputStream.close();
+
+                        // Optionally detect mime type or set manually
+                        String mimeType = getContentResolver().getType(fileUri);
+                        if (mimeType == null) mimeType = "application/octet-stream";
+
+                        params.put("file", new DataPart("upload_" + System.currentTimeMillis(), fileBytes, mimeType));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return params;
+            }
         };
-        VolleySingleton.getInstance(this).addToRequestQueue(request);
+
+        VolleySingleton.getInstance(this).addToRequestQueue(multipartRequest);
     }
 }
