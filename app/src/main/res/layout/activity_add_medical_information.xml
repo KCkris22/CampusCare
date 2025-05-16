@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText android:id="@+id/etPatientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Patient Name" />
+
+        <EditText android:id="@+id/etDOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date of Birth"
+            android:focusable="false" />
+
+        <EditText android:id="@+id/etBloodType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Blood Type" />
+
+        <EditText android:id="@+id/etMedicalConditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Medical Conditions" />
+
+        <EditText android:id="@+id/etAllergies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Allergies" />
+
+        <EditText android:id="@+id/etMedications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Medications" />
+
+        <Button android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Medical History" />
+    </LinearLayout>
+</ScrollView>
