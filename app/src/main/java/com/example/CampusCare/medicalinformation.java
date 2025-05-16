@@ -1,38 +1,38 @@
 package com.example.campuscare;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedicalInformation extends AppCompatActivity {
 
-    TextView textViewResult;
+    RecyclerView recyclerView;
+    List<MedicalHistoryItem> medicalList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_information);
+        setContentView(R.layout.medicalinformation);
 
-        textViewResult = findViewById(R.id.textViewResult);
+        recyclerView = findViewById(R.id.rvMedicalHistory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Retrieve data from Intent
-        String name = getIntent().getStringExtra("name");
-        String birthDate = getIntent().getStringExtra("birthDate");
-        String bloodType = getIntent().getStringExtra("bloodType");
-        String medicalCondition = getIntent().getStringExtra("medicalCondition");
-        String symptoms = getIntent().getStringExtra("symptoms");
-        String allergies = getIntent().getStringExtra("allergies");
-        String medications = getIntent().getStringExtra("medications");
+        medicalList = new ArrayList<>();
 
-        // Display the data
-        String result = "Name: " + name + "\n"
-                + "Birth Date: " + birthDate + "\n"
-                + "Blood Type: " + bloodType + "\n"
-                + "Medical Condition: " + medicalCondition + "\n"
-                + "Symptoms: " + symptoms + "\n"
-                + "Allergies: " + allergies + "\n"
-                + "Medications: " + medications;
+        medicalList.add(new MedicalHistoryItem(
+                getIntent().getStringExtra("name"),
+                getIntent().getStringExtra("birthDate"),
+                getIntent().getStringExtra("bloodType"),
+                getIntent().getStringExtra("medicalCondition"),
+                getIntent().getStringExtra("allergies"),
+                getIntent().getStringExtra("medications")
+        ));
 
-        textViewResult.setText(result);
+        MedicalHistoryAdapter adapter = new MedicalHistoryAdapter(medicalList);
+        recyclerView.setAdapter(adapter);
     }
 }
